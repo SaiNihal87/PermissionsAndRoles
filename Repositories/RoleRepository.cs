@@ -30,15 +30,15 @@ public class RoleRepository : BaseRepository, IRoleRepository
         var roleCreated = await connection.QueryFirstAsync<Role>(query, role);
 
         var permissionIds = role.PermissionsIds;
-          Console.WriteLine("permissionIds.Count()");
-           Console.WriteLine(permissionIds.Count());
+        //   Console.WriteLine("permissionIds.Count()");
+        //    Console.WriteLine(permissionIds.Count());
         var permissionQuery = @"INSERT INTO role_permission (role_id, permission_id)
                                     VALUES (@RoleId, @PermissionId)";
-        foreach(var permission in permissionIds)
+        foreach(var permissionId in permissionIds)
         {    
-            var permissionId = permission;
-            Console.WriteLine("permission");
-            Console.WriteLine(permission);
+            // var permissionId = permission;
+            // Console.WriteLine("permission");
+            // Console.WriteLine(permission);
             await connection.QueryAsync(permissionQuery,new{
                 RoleId = roleCreated.Id,
                 PermissionId = permissionId
